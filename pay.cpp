@@ -2,61 +2,59 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <vector>
 
-int readData(Person employees[], int size);
-void writeData(Person employees[], int size);
+void readData(vector<Person>&employees);
+void writeData(vector<Person>&employees);
 
 
 int main()
 {
-  Person employees[19];
-  int count=readData(employees, 19);
+  vector<Person> employees;
 
-  writeData(employees, count);
+  readData(employees);
+
+  writeData(employees);
 
   return 0;
 }
 
-int readData(Person employees[], int size)
+void readData(vector<Person>&employees)
 {
   ifstream inData;
-  string filename="input.txt";
   string firstName, lastName;
   float payRate, hoursWorked;
   string name;
-  inData.open(filename);
-  int count=0;
-  for(int i=0; i<size; i++)
-  {
+
+  inData.open("input.txt");
+
+while(!inData.eof())
+{
     inData>>firstName;
     cin.clear();
-    employees[i].setFirstName(firstName);
     inData>>lastName;
     cin.clear();
-    employees[i].setLastName(lastName);
     inData>>hoursWorked>>payRate;
-    employees[i].setHoursWorked(hoursWorked);
-    employees[i].setPayRate(payRate);
 
-    if(inData.eof())
-    break;
-    count++;
-  }
+employees.emplace_back(firstName, lastName, payRate, hoursWorked);
+}
   inData.close();
-  return count;
+
 }
 
-void writeData(Person employees[], int size)
+void writeData(vector<Person>&employees)
 {
   ofstream outData;
   string fullName;
   float totalPay;
 outData.open("output.txt");
+outData<<fixed;
+outData<<setprecision(2);
 
-  for(int i=0; i<size; i++)
+  for(int i=0; i<employees.size()-1; i++)
   {
-    fullName=employees[i].fullName();
-    totalPay=employees[i].totalPay();
+    fullName=employees.at(i).fullName();
+    totalPay=employees.at(i).totalPay();
     outData<<fullName<<" "<<totalPay<<endl;
   }
 outData.close();

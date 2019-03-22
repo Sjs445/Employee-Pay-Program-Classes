@@ -3,7 +3,14 @@ string Person::getFirstName() {
     return firstName;
 }
 
-Person::Person(){}
+Person::Person(string firstName, string lastName, float  payRate, float
+hoursWorked)
+{
+  setFirstName(firstName);
+  setLastName(lastName);
+  setPayRate(payRate);
+  setHoursWorked(hoursWorked);
+}
 
 string Person::getLastName()
 {  return lastName; }

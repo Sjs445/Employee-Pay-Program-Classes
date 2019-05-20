@@ -7,15 +7,11 @@
 void readData(vector<Person>&employees);
 void writeData(vector<Person>&employees);
 
-
 int main()
 {
   vector<Person> employees;
-
   readData(employees);
-
   writeData(employees);
-
   return 0;
 }
 
@@ -31,15 +27,11 @@ void readData(vector<Person>&employees)
 while(!inData.eof())
 {
     inData>>firstName;
-    cin.clear();
     inData>>lastName;
-    cin.clear();
     inData>>hoursWorked>>payRate;
-
-employees.emplace_back(firstName, lastName, payRate, hoursWorked);
+    employees.emplace_back(firstName, lastName, payRate, hoursWorked);
 }
   inData.close();
-
 }
 
 void writeData(vector<Person>&employees)
@@ -47,9 +39,9 @@ void writeData(vector<Person>&employees)
   ofstream outData;
   string fullName;
   float totalPay;
-outData.open("output.txt");
-outData<<fixed;
-outData<<setprecision(2);
+  outData.open("output.txt");
+  outData<<fixed;
+  outData<<setprecision(2);
 
   for(int i=0; i<employees.size()-1; i++)
   {
